@@ -393,7 +393,6 @@ namespace lab1__semester_2_
             string[] nameOfCourse = new string[]{"Основи програмування", "Мова програмування C#", "Веб-програмування",
                 "Веб-дизайн", "Розробка додатків під IOS"};
             string[] group = new string[]{"KP-01", "KP-02", "KP-03", "KP-91", "KP-92", "KP-93"};
-            // int[] randomNums = GetArrayOfRandomUniqueNumbers();
             Random random = new Random();
             Course c = new Course(){id = randomNums[orderOfNum], name = nameOfCourse[random.Next(0, nameOfCourse.Length-1)],
                 group = group[random.Next(0, group.Length-1)], semester = random.Next(1, 6)};
