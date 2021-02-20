@@ -106,7 +106,7 @@ namespace lab1__semester_2_
             }
 
             // Генерюємо дані у файл
-            GenerateItemsInFile(numOfLines, args[0], 1, 100);
+            GenerateItemsWithUniqueIDsInFile(numOfLines, args[0], 1, 100);
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"Перша частина успішно виконана! Сутності згенеровано та збережено у файл `{args[0]}`.");
@@ -135,7 +135,7 @@ namespace lab1__semester_2_
                 throw new FileNotFoundException($"ERROR! No such file in current directory: `{inputFile1}`");
             }
             // Генеруємо дані у файл 1
-            GenerateItemsInFile(10, inputFile1, 1, 11);
+            GenerateItemsWithUniqueIDsInFile(10, inputFile1, 1, 11);
 
             string inputFile2 = "./file2.csv";
             if (!IsExistingFile(inputFile2))
@@ -143,7 +143,7 @@ namespace lab1__semester_2_
                 throw new FileNotFoundException($"ERROR! No such file in current directory: `{inputFile2}`");
             }
             // Генеруємо дані у файл 2
-            GenerateItemsInFile(100000, inputFile2, 1, 150000);
+            GenerateItemsWithUniqueIDsInFile(100000, inputFile2, 1, 150000);
 
             string outputFile = "./file3.csv";
             if (!IsExistingFile(outputFile))
@@ -360,7 +360,7 @@ namespace lab1__semester_2_
             return (double)sum / lc.GetSize();
         }
 
-        static void GenerateItemsInFile(int numOfItems, string filePath, int low, int high)
+        static void GenerateItemsWithUniqueIDsInFile(int numOfItems, string filePath, int low, int high)
         {
             if (numOfItems > (high - low))
             {
@@ -371,6 +371,16 @@ namespace lab1__semester_2_
             for(int i = 0; i < numOfItems; i++)
             {
                 sb.Append(AddCourse(GetRandomCourse(randomNums, i)));
+            }
+            File.WriteAllText($"{filePath}", sb.ToString());
+        }
+
+        static void GenerateItemsInFile(int numOfItems, string filePath, int low, int high)
+        {
+            StringBuilder sb = new StringBuilder("id,name,group,semester\r");
+            for(int i = 0; i < numOfItems; i++)
+            {
+                sb.Append(AddCourse(GetRandomCourse(low, high)));
             }
             File.WriteAllText($"{filePath}", sb.ToString());
         }
@@ -395,6 +405,17 @@ namespace lab1__semester_2_
             string[] group = new string[]{"KP-01", "KP-02", "KP-03", "KP-91", "KP-92", "KP-93"};
             Random random = new Random();
             Course c = new Course(){id = randomNums[orderOfNum], name = nameOfCourse[random.Next(0, nameOfCourse.Length-1)],
+                group = group[random.Next(0, group.Length-1)], semester = random.Next(1, 6)};
+            return c;
+        }
+
+        static Course GetRandomCourse(int low, int high)
+        {
+            string[] nameOfCourse = new string[]{"Основи програмування", "Мова програмування C#", "Веб-програмування",
+                "Веб-дизайн", "Розробка додатків під IOS"};
+            string[] group = new string[]{"KP-01", "KP-02", "KP-03", "KP-91", "KP-92", "KP-93"};
+            Random random = new Random();
+            Course c = new Course(){id = random.Next(low, high), name = nameOfCourse[random.Next(0, nameOfCourse.Length-1)],
                 group = group[random.Next(0, group.Length-1)], semester = random.Next(1, 6)};
             return c;
         }
