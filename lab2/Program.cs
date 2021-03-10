@@ -564,3 +564,4 @@ namespace lab2
         }
     }
 }
+
