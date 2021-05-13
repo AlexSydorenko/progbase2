@@ -279,7 +279,7 @@ namespace lab5
             }
 
             DataProcessor dp = new DataProcessor(courses.listCourses);
-            if (dp.GetCourseTitlesFromTheBuilding(subcommands[1]) == null)
+            if (dp.GetCourseTitlesFromTheBuilding(subcommands[1]).Count == 0)
             {
                 Console.WriteLine($"Помилка в назві будинка: `{subcommands[1]}`! Спробуйте ще раз!");
                 return;

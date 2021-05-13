@@ -9,7 +9,7 @@ namespace lab5
         public string footnote;
 
         [System.ComponentModel.DefaultValue(0)]
-        public int sln;      // int should be
+        public int sln;
         public string prefix;
 
         [XmlElement("crs")]

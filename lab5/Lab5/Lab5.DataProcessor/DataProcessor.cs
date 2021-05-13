@@ -42,7 +42,10 @@ namespace lab5
             HashSet<string> uniquePrefixes = new HashSet<string>();
             foreach (Course course in courses)
             {
-                uniquePrefixes.Add(course.prefix);
+                if (course.prefix != "")
+                {
+                    uniquePrefixes.Add(course.prefix);
+                }
             }
             return uniquePrefixes;
         }
@@ -52,7 +55,7 @@ namespace lab5
             HashSet<string> titles = new HashSet<string>();
             foreach (Course course in courses)
             {
-                if (course.place.building == building)
+                if (course.place.building == building && course.place.building != "")
                 {
                     titles.Add(course.title);
                 }
@@ -65,7 +68,10 @@ namespace lab5
             HashSet<string> instructors = new HashSet<string>();
             foreach (Course course in courses)
             {
-                instructors.Add(course.instructor);
+                if (course.instructor != "")
+                {
+                    instructors.Add(course.instructor);
+                }
             }
             return instructors;
         }
